@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
-import Book from './Book'
 
 class ListBooks extends Component {
+
+  shelfChange = (book, value, shelf) => {
+    this.props.onBookChangeShelf(book, value, shelf)
+  }
 
   render() {
     const { currently, want, read } = this.props;
@@ -15,9 +18,9 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf shelf={currently.type} books={currently.books} />
-            <BookShelf shelf={want.type} books={want.books} />
-            <BookShelf shelf={read.type} books={read.books} />
+            <BookShelf shelf={currently.shelf} books={currently.books} onShelfChange={this.shelfChange} />
+            <BookShelf shelf={want.shelf} books={want.books} onShelfChange={this.shelfChange} />
+            <BookShelf shelf={read.shelf} books={read.books} onShelfChange={this.shelfChange} />
           </div>
         </div>
         <div className="open-search">
