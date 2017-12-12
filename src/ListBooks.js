@@ -4,8 +4,8 @@ import BookShelf from './BookShelf'
 
 class ListBooks extends Component {
 
-  shelfChange = (book, value, shelf) => {
-    this.props.onBookChangeShelf(book, value, shelf)
+  shelfChange = (book, value) => {
+    this.props.onBookChangeShelf(book, value)
   }
 
   render() {

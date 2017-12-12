@@ -46,7 +46,7 @@ class BooksApp extends React.Component {
     this.getCurrentState()
   }
 
-  bookChangeShelf = (book, newShelf, oldShelf) => {
+  bookChangeShelf = (book, newShelf) => {
     BooksAPI.update(book, newShelf)
       .then(book => {
         this.getCurrentState()
@@ -63,7 +63,7 @@ class BooksApp extends React.Component {
                      onBookChangeShelf={this.bookChangeShelf}/>
         )} />
         <Route path="/search" render={() => (
-          <SearchBooks />
+          <SearchBooks onBookChangeShelf={this.bookChangeShelf} />
         )} />
       </div>
     )
