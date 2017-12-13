@@ -7,7 +7,8 @@ import { Debounce } from 'react-throttle';
 class SearchBooks extends Component {
   state = {
     search: '',
-    books: []
+    books: [],
+    isLoading: false
   };
 
   searchBook(search) {
@@ -16,9 +17,11 @@ class SearchBooks extends Component {
     });
 
     if (this.state.search.length > 0) {
+      this.setState({ isLoading: true });
       BooksAPI.search(this.state.search).then(books => {
         this.setState({
-          books: books
+          books: books,
+          isLoading: false
         });
       });
     } else {
@@ -30,6 +33,7 @@ class SearchBooks extends Component {
 
   bookChange = (book, value) => {
     this.props.onBookChangeShelf(book, value);
+    this.props.history.push('/');
   };
 
   render() {
@@ -57,8 +61,16 @@ class SearchBooks extends Component {
                   <Book book={book} onBookChange={this.bookChange} />
                 </li>
               ))
-            ) : (
+            ) : !this.state.isLoading ? (
               <li>No book found!</li>
+            ) : (
+              <div className="spinner">
+                <div className="rect1" />
+                <div className="rect2" />
+                <div className="rect3" />
+                <div className="rect4" />
+                <div className="rect5" />
+              </div>
             )}
           </ol>
         </div>
