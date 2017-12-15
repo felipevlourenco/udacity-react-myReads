@@ -39,9 +39,6 @@ class BooksApp extends React.Component {
           books: books.filter(book => book.shelf === 'read')
         }
       });
-      console.log('App====================================');
-      console.log(this.state.books);
-      console.log('====================================App');
     });
   }
 

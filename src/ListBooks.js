@@ -7,19 +7,9 @@ class ListBooks extends Component {
     this.props.onBookChangeShelf(book, value);
   };
 
-  componentDidMount() {
-    // setTimeout(() => {
-    // console.log('ListBooks====================================');
-    // console.log(this.props.books);
-    // console.log('====================================ListBooks');
-    // }, 2000);
-  }
+  componentDidMount() {}
 
-  componentDidUpdate() {
-    console.log('ListBooks====================================');
-    console.log(this.props.books);
-    console.log('====================================ListBooks');
-  }
+  componentDidUpdate() {}
 
   render() {
     const { books, currently, want, read } = this.props;
