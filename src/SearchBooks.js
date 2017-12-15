@@ -19,6 +19,15 @@ class SearchBooks extends Component {
     if (this.state.search.length > 0) {
       this.setState({ isLoading: true });
       BooksAPI.search(this.state.search).then(books => {
+        books.map(book => {
+          let currentBook = this.props.books.find(b => b.id === book.id);
+
+          if (currentBook !== undefined) {
+            book.shelf = currentBook.shelf;
+          }
+          return book;
+        });
+
         this.setState({
           books: books,
           isLoading: false

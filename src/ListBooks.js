@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import BookShelf from './BookShelf'
+import { Link } from 'react-router-dom';
+import BookShelf from './BookShelf';
 
 class ListBooks extends Component {
-
   shelfChange = (book, value) => {
-    this.props.onBookChangeShelf(book, value)
+    this.props.onBookChangeShelf(book, value);
+  };
+
+  componentDidMount() {
+    // setTimeout(() => {
+    // console.log('ListBooks====================================');
+    // console.log(this.props.books);
+    // console.log('====================================ListBooks');
+    // }, 2000);
+  }
+
+  componentDidUpdate() {
+    console.log('ListBooks====================================');
+    console.log(this.props.books);
+    console.log('====================================ListBooks');
   }
 
   render() {
-    const { currently, want, read } = this.props;
+    const { books, currently, want, read } = this.props;
 
     return (
       <div className="list-books">
@@ -18,9 +31,21 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf shelf={currently.shelf} books={currently.books} onShelfChange={this.shelfChange} />
-            <BookShelf shelf={want.shelf} books={want.books} onShelfChange={this.shelfChange} />
-            <BookShelf shelf={read.shelf} books={read.books} onShelfChange={this.shelfChange} />
+            <BookShelf
+              shelf={currently.shelf}
+              books={currently.books}
+              onShelfChange={this.shelfChange}
+            />
+            <BookShelf
+              shelf={want.shelf}
+              books={want.books}
+              onShelfChange={this.shelfChange}
+            />
+            <BookShelf
+              shelf={read.shelf}
+              books={read.books}
+              onShelfChange={this.shelfChange}
+            />
           </div>
         </div>
         <div className="open-search">
@@ -29,8 +54,8 @@ class ListBooks extends Component {
           </Link>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default ListBooks
+export default ListBooks;

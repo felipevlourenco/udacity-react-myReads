@@ -7,7 +7,7 @@ import SearchBooks from './SearchBooks';
 
 class BooksApp extends React.Component {
   state = {
-    // books: []
+    books: [],
     currently: {
       type: '',
       books: []
@@ -25,6 +25,7 @@ class BooksApp extends React.Component {
   getCurrentState() {
     BooksAPI.getAll().then(books => {
       this.setState({
+        books: books,
         currently: {
           shelf: 'currentlyReading',
           books: books.filter(book => book.shelf === 'currentlyReading')
@@ -38,6 +39,9 @@ class BooksApp extends React.Component {
           books: books.filter(book => book.shelf === 'read')
         }
       });
+      console.log('App====================================');
+      console.log(this.state.books);
+      console.log('====================================App');
     });
   }
 
@@ -59,6 +63,7 @@ class BooksApp extends React.Component {
           exact
           render={() => (
             <ListBooks
+              books={this.state.books}
               currently={this.state.currently}
               want={this.state.want}
               read={this.state.read}
@@ -71,6 +76,7 @@ class BooksApp extends React.Component {
           render={({ history }) => (
             <SearchBooks
               history={history}
+              books={this.state.books}
               onBookChangeShelf={this.bookChangeShelf}
             />
           )}
