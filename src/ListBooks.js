@@ -7,12 +7,8 @@ class ListBooks extends Component {
     this.props.onBookChangeShelf(book, value);
   };
 
-  componentDidMount() {}
-
-  componentDidUpdate() {}
-
   render() {
-    const { books, currently, want, read } = this.props;
+    const { books } = this.props;
 
     return (
       <div className="list-books">
@@ -22,18 +18,18 @@ class ListBooks extends Component {
         <div className="list-books-content">
           <div>
             <BookShelf
-              shelf={currently.shelf}
-              books={currently.books}
+              shelf="currentlyReading"
+              books={books.filter(book => book.shelf === 'currentlyReading')}
               onShelfChange={this.shelfChange}
             />
             <BookShelf
-              shelf={want.shelf}
-              books={want.books}
+              shelf="wantToRead"
+              books={books.filter(book => book.shelf === 'wantToRead')}
               onShelfChange={this.shelfChange}
             />
             <BookShelf
-              shelf={read.shelf}
-              books={read.books}
+              shelf="read"
+              books={books.filter(book => book.shelf === 'read')}
               onShelfChange={this.shelfChange}
             />
           </div>

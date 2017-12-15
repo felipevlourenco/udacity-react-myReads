@@ -7,37 +7,13 @@ import SearchBooks from './SearchBooks';
 
 class BooksApp extends React.Component {
   state = {
-    books: [],
-    currently: {
-      type: '',
-      books: []
-    },
-    want: {
-      type: '',
-      books: []
-    },
-    read: {
-      type: '',
-      books: []
-    }
+    books: []
   };
 
   getCurrentState() {
     BooksAPI.getAll().then(books => {
       this.setState({
-        books: books,
-        currently: {
-          shelf: 'currentlyReading',
-          books: books.filter(book => book.shelf === 'currentlyReading')
-        },
-        want: {
-          shelf: 'wantToRead',
-          books: books.filter(book => book.shelf === 'wantToRead')
-        },
-        read: {
-          shelf: 'read',
-          books: books.filter(book => book.shelf === 'read')
-        }
+        books: books
       });
     });
   }
@@ -61,9 +37,6 @@ class BooksApp extends React.Component {
           render={() => (
             <ListBooks
               books={this.state.books}
-              currently={this.state.currently}
-              want={this.state.want}
-              read={this.state.read}
               onBookChangeShelf={this.bookChangeShelf}
             />
           )}
